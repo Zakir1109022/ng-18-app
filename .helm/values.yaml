@@ -1,10 +1,6 @@
-rollingNamespace: "rolling"
+blueGreenNamespace: "blue-green"
 appName: "ng"
-replicaCount: 1
-
-rollingUpdate:
-  maxSurge: 1
-  maxUnavailable: 1
+replicaCount: 3
 
 image:
   repository: zakir22/ng-18-app:latest
@@ -15,5 +11,8 @@ image:
 service:
   type: ClusterIP
   protocol: TCP
-  port: 4300
+  port: 4200
   targetPort: 80
+
+envBlue: blue
+envGreen: green

@@ -1,25 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{.Values.appName}}
-  namespace: {{.Values.rollingNamespace}}
+  name: {{.Values.appName}}-{{.Values.envGreen}}
+  namespace: {{.Values.blueGreenNamespace}}
 spec:
-  replicas: 3
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxSurge: {{.Values.rollingUpdate.maxSurge}}
-      maxUnavailable: {{.Values.rollingUpdate.maxUnavailable}}
+  replicas: {{.Values.replicaCount}}
   selector:
     matchLabels:
       app: {{.Values.appName}}
+      env: {{.Values.envGreen}}
   template:
     metadata:
       labels:
         app: {{.Values.appName}}
+        env: {{.Values.envGreen}}
     spec:
       containers:
       - name: {{.Values.appName}}-container
-        image: {{.Values.image.repositoryV2}}
+        image: {{.Values.image.repository}}
         ports:
         - containerPort: {{.Values.service.targetPort}}

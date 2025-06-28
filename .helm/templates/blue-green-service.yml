@@ -2,11 +2,12 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{.Values.appName}}-service
-  namespace: {{.Values.rollingNamespace}}
+  namespace: {{.Values.blueGreenNamespace}}
 spec:
   type: {{.Values.service.type}}
   selector:
     app: {{.Values.appName}}
+    env: {{.Values.envGreen}}
   ports:
     - protocol: {{.Values.service.protocol}}
       port: {{.Values.service.port}}
