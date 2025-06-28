@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   ng-app:
-    image: ng-app:latest
+    image: zakir22/ng-18-app:latest
     container_name: ng-container
     ports:
-      - 80:80
+      - 4200:80

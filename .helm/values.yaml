@@ -1,0 +1,19 @@
+rollingNamespace: "rolling"
+appName: "ng"
+replicaCount: 1
+
+rollingUpdate:
+  maxSurge: 1
+  maxUnavailable: 1
+
+image:
+  repository: zakir22/ng-18-app:latest
+  repositoryV1: zakir22/ng-18-app:v1
+  repositoryV2: zakir22/ng-18-app:v2
+  pullPolicy: IfNotPresent
+
+service:
+  type: LoadBalancer
+  protocol: TCP
+  port: 4200
+  targetPort: 80

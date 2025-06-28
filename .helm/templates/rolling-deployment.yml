@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{.Values.appName}}
+  namespace: {{.Values.rollingNamespace}}
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: {{.Values.rollingUpdate.maxSurge}}
+      maxUnavailable: {{.Values.rollingUpdate.maxUnavailable}}
+  selector:
+    matchLabels:
+      app: {{.Values.appName}}
+  template:
+    metadata:
+      labels:
+        app: {{.Values.appName}}
+    spec:
+      containers:
+      - name: {{.Values.appName}}-container
+        image: {{.Values.image.repository}}
+        ports:
+        - containerPort: {{.Values.service.targetPort}}
