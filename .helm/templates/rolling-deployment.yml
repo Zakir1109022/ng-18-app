@@ -20,6 +20,6 @@ spec:
     spec:
       containers:
       - name: {{.Values.appName}}-container
-        image: {{.Values.image.repositoryV1}}
+        image: {{.Values.image.repositoryV2}}
         ports:
         - containerPort: {{.Values.service.targetPort}}

@@ -15,5 +15,5 @@ image:
 service:
   type: ClusterIP
   protocol: TCP
-  port: 4200
+  port: 4300
   targetPort: 80
