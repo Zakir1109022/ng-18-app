@@ -1,0 +1,65 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: canary
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ng-v1
+  namespace: canary
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: ng
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: ng
+        version: v1
+    spec:
+      containers:
+      - name: ng
+        image: zakir22/ng-18-app:v1
+        ports:
+        - containerPort: 80
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ng-v2
+  namespace: canary
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ng
+      version: v2
+  template:
+    metadata:
+      labels:
+        app: ng
+        version: v2
+    spec:
+      containers:
+      - name: ng
+        image: zakir22/ng-18-app:v2
+        ports:
+        - containerPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ng-service
+  namespace: canary
+spec:
+  selector:
+    app: ng
+  ports:
+    - port: 4400
+      targetPort: 80
