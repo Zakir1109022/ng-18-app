@@ -20,6 +20,7 @@
             "outputPath": "dist/angular-18-test",
             "index": "src/index.html",
             "browser": "src/main.ts",
+            "optimization": false,
             "polyfills": [
               "zone.js"
             ],
@@ -38,6 +39,7 @@
           },
           "configurations": {
             "production": {
+              "optimization": true,
               "budgets": [
                 {
                   "type": "initial",
